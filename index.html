@@ -1,13 +1,20 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Yasis Toyab</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Wondering who is Manuelson Toyab Yasis? Watch videos and explore information about this legendary developer.">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<meta property="og:title" content="Yasis Toyab">
+<meta property="og:description" content="Watch videos and explore information about Manuelson Toyab Yasis.">
+<meta property="og:image" content="./og.png">
+<meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -16,78 +23,343 @@
       theme: {
         extend: {
           fontFamily: {
-            poppins: ['Poppins', 'sans-serif']
+            poppins: ["Poppins", "sans-serif"]
           },
           animation: {
-            fade: 'fade 1.2s ease-out forwards',
-            bounceSlow: 'bounceSlow 2s infinite',
-            blink: 'blink 1s infinite'
+            fade: "fade 1.2s ease-out forwards",
+            bounceSlow: "bounceSlow 2s infinite",
+            blink: "blink 1s infinite",
+            float: "float 4s ease-in-out infinite",
+            pulseGlow: "pulseGlow 2s infinite"
           },
           keyframes: {
             fade: {
-              '0%': { opacity: '0', transform: 'translateY(30px)' },
-              '100%': { opacity: '1', transform: 'translateY(0)' }
+              "0%": {
+                opacity: "0",
+                transform: "translateY(30px)"
+              },
+              "100%": {
+                opacity: "1",
+                transform: "translateY(0)"
+              }
             },
             bounceSlow: {
-              '0%,100%': { transform: 'translateY(0)' },
-              '50%': { transform: 'translateY(10px)' }
+              "0%,100%": {
+                transform: "translateY(0)"
+              },
+              "50%": {
+                transform: "translateY(10px)"
+              }
             },
             blink: {
-              '0%,50%': { opacity: '1' },
-              '51%,100%': { opacity: '0' }
+              "0%,50%": {
+                opacity: "1"
+              },
+              "51%,100%": {
+                opacity: "0"
+              }
+            },
+            float: {
+              "0%,100%": {
+                transform: "translateY(0px)"
+              },
+              "50%": {
+                transform: "translateY(-6px)"
+              }
+            },
+            pulseGlow: {
+              "0%,100%": {
+                boxShadow: "0 0 15px rgba(168,85,247,0.4)"
+              },
+              "50%": {
+                boxShadow: "0 0 30px rgba(99,102,241,0.7)"
+              }
             }
           }
         }
       }
-    }
+    };
   </script>
 
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      overflow-x: hidden;
+      background: #000;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 95px 95px;
+      animation: moveGrid 10s linear infinite;
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at top, rgba(99,102,241,0.2), transparent 35%),
+        radial-gradient(circle at bottom, rgba(168,85,247,0.2), transparent 35%);
+      z-index: -1;
+    }
+
+    @keyframes moveGrid {
+      from {
+        transform: translateY(0px);
+      }
+      to {
+        transform: translateY(95px);
+      }
+    }
+
     .typing::after {
-      content: '|';
+      content: "|";
       margin-left: 4px;
       animation: blink 1s infinite;
+    }
+
+    .video-slide {
+      display: none;
+      animation: fade .5s ease;
+      position: relative;
+    }
+
+    .video-slide.active {
+      display: block;
+    }
+
+    video {
+      width: 100%;
+      height: auto;
+      max-height: 80vh;
+      object-fit: contain;
+      background: black;
+      border-radius: 24px;
+    }
+
+    .video-title {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 10;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.15);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+    }
+
+    .video-title h2 {
+      font-size: 12px;
+      font-weight: 600;
+      color: white;
+      letter-spacing: 0.3px;
+    }
+
+    .nav-btn {
+      position: relative;
+      overflow: hidden;
+      transition: all .35s ease;
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-5px) scale(1.05);
+    }
+
+    .nav-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.12);
+      transform: translateX(-100%);
+      transition: .5s;
+    }
+
+    .nav-btn:hover::before {
+      transform: translateX(100%);
+    }
+
+    .scroll-indicator {
+      position: fixed;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
+      transition: opacity .5s ease, transform .5s ease;
       opacity: 1;
     }
 
+    .scroll-indicator.hide {
+      opacity: 0;
+      transform: translateX(-50%) translateY(20px);
+      pointer-events: none;
+    }
+
+    .scroll-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      animation: floatExplore 2.5s ease-in-out infinite;
+    }
+
+    .scroll-text {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,0.70);
+      text-transform: none;
+    }
+
+    .scroll-arrow {
+      animation: arrowMove 1.5s infinite;
+    }
+
+    @keyframes floatExplore {
+      0%,100% {
+        transform: translateY(0px);
+        opacity: .65;
+      }
+
+      50% {
+        transform: translateY(-4px);
+        opacity: 1;
+      }
+    }
+
+    @keyframes arrowMove {
+      0%,100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(5px);
+      }
+    }
+
+    @media (min-width: 768px) {
+      .video-title h2 {
+        font-size: 14px;
+      }
+
+      .scroll-text {
+        font-size: 12px;
+      }
+    }
+
     @keyframes blink {
-      0%, 50% { opacity: 1; }
-      51%, 100% { opacity: 0; }
+      0%, 50% {
+        opacity: 1;
+      }
+
+      51%, 100% {
+        opacity: 0;
+      }
     }
   </style>
 </head>
 
-<body class="font-poppins bg-gradient-to-br from-black via-gray-900 to-black text-white min-h-screen overflow-x-hidden">
+<body class="font-poppins text-white min-h-screen">
 
   <header class="text-center py-16 animate-fade">
-    <h1 class="text-5xl md:text-8xl font-black tracking-widest bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent">
+
+    <h1 class="text-5xl md:text-8xl font-black tracking-widest bg-gradient-to-r from-pink-500 via-purple-400 to-indigo-400 bg-clip-text text-transparent animate-pulse">
       Greetings!
     </h1>
-    <p class="mt-4 text-gray-400 tracking-wide"></p>
+
   </header>
 
-  <main class="flex flex-col items-center px-6">
+  <main class="flex flex-col items-center px-4 md:px-6">
 
-    <section class="w-full max-w-5xl animate-fade">
+    <section class="w-full max-w-6xl animate-fade">
 
       <div class="mb-10 text-center min-h-[90px]">
-        <p id="typingText" class="typing text-sm md:text-1xl font-semibold text-gray-400 leading-relaxed"></p>
+        <p id="typingText" class="typing text-sm md:text-xl font-semibold text-gray-300 leading-relaxed"></p>
       </div>
 
-      <div class="rounded-3xl overflow-hidden bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl">
-        <video
-          class="w-full object-cover"
-          src="./yasis.mp4"
-          controls
-          loop
-          playsinline>
-        </video>
+      <div class="rounded-[30px] overflow-hidden bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl p-2 md:p-4 animate-pulseGlow">
+
+        <div class="video-slide active">
+          <div class="video-title">
+            <h2>👨🏻‍💻</h2>
+          </div>
+
+          <video src="./yasis.mp4" controls playsinline></video>
+        </div>
+
+        <div class="video-slide">
+          <div class="video-title">
+            <h2>💘 Stupid Love</h2>
+          </div>
+
+          <video src="./yasis-stupid-love.mp4" controls playsinline></video>
+        </div>
+
+        <div class="video-slide">
+          <div class="video-title">
+            <h2>🍺 Lakas Tama</h2>
+          </div>
+
+          <video src="./yasis-lakas-tama.mp4" controls playsinline></video>
+        </div>
+
+        <div class="video-slide">
+          <div class="video-title">
+            <h2>🎵 Pamparampampam</h2>
+          </div>
+
+          <video src="./yasis-pamparampampam.mp4" controls playsinline></video>
+        </div>
+
+        <div class="video-slide">
+          <div class="video-title">
+            <h2>🇵🇭 Dalagang Filipina</h2>
+          </div>
+
+          <video src="./yasis-dalagang-filipina.mp4" controls playsinline></video>
+        </div>
+
+        <div class="video-slide">
+          <div class="video-title">
+            <h2>🖤 How You Like That</h2>
+          </div>
+
+          <video src="./yasis-how-you-like-that.mp4" controls playsinline></video>
+        </div>
+
+        <div class="video-slide">
+          <div class="video-title">
+            <h2>🎉 Party Chinese</h2>
+          </div>
+
+          <video src="./yasis-party-chinese.mp4" controls playsinline></video>
+        </div>
+
       </div>
 
-      <div class="mt-10 flex justify-center animate-bounceSlow">
-        <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-        </svg>
+      <div class="flex items-center justify-center gap-5 mt-8">
+
+        <button onclick="prevSlide()"
+          class="nav-btn px-7 py-3 rounded-2xl bg-gradient-to-r from-indigo-500 to-indigo-400 font-semibold shadow-2xl">
+          Previous
+        </button>
+
+        <button onclick="nextSlide()"
+          class="nav-btn px-7 py-3 rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 font-semibold shadow-2xl">
+          Next
+        </button>
+
       </div>
 
     </section>
@@ -95,83 +367,181 @@
     <section class="w-full max-w-5xl mt-20 grid grid-cols-1 md:grid-cols-2 gap-10 animate-fade">
 
       <div class="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 shadow-xl">
+
         <h2 class="text-3xl font-bold text-indigo-400 mb-6">
           Basic Information
         </h2>
 
         <div class="space-y-4 text-lg text-gray-300">
+
           <div class="flex justify-between border-b border-white/10 pb-2">
             <span class="text-gray-400">Name</span>
             <span class="font-semibold">Manuelson Yasis</span>
           </div>
-                    <div class="flex justify-between">
+
+          <div class="flex justify-between border-b border-white/10 pb-2">
             <span class="text-gray-400">A.K.A</span>
             <span class="font-semibold">Priti lil gey dibiloper</span>
           </div>
+
           <div class="flex justify-between border-b border-white/10 pb-2">
             <span class="text-gray-400">Age</span>
             <span class="font-semibold">16</span>
           </div>
+
           <div class="flex justify-between border-b border-white/10 pb-2">
             <span class="text-gray-400">Birthday</span>
             <span class="font-semibold">December 31</span>
           </div>
-          <div class="flex justify-between">
+
+          <div class="flex justify-between border-b border-white/10 pb-2">
             <span class="text-gray-400">Birth Year</span>
             <span class="font-semibold">2009</span>
           </div>
-          <div class="flex justify-between">
+
+          <div class="flex justify-between border-b border-white/10 pb-2">
             <span class="text-gray-400">Location</span>
-            <span class="font-semibold">Naga, <br>Camarines Sur</span>
+
+            <span class="font-semibold text-right">
+              Naga,<br />
+              Camarines Sur
+            </span>
           </div>
+
           <div class="flex justify-between">
-  <span class="text-gray-400">Nationality</span>
-  <span class="font-semibold">Filipino</span>
-</div>
+            <span class="text-gray-400">Nationality</span>
+            <span class="font-semibold">Filipino</span>
+          </div>
 
         </div>
+
       </div>
 
       <div class="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 shadow-xl">
+
         <h3 class="text-3xl font-bold text-purple-400 mb-6">
-          Achievement / <br>Skills
+          Achievement / Skills
         </h3>
-<div class="space-y-4 text-gray-300 text-1sm font-semibold">
-  <p>• Hacked PisoWifi using Websocket</p>
-  <p>• Autobot maker</p>
-  <p>• Pagebot creator</p>
-  <p>• International Forker</p>
-</div>
+
+        <div class="space-y-4 text-gray-300 text-sm md:text-base font-semibold">
+          <p>• Hacked PisoWifi using Websocket</p>
+          <p>• Autobot maker</p>
+          <p>• Pagebot creator</p>
+          <p>• International Forker</p>
+        </div>
+
       </div>
 
     </section>
 
   </main>
 
-<footer class="mt-24 py-10 text-center text-gray-500 border-t border-white/10">
-  © <span id="year"></span> Manuelson Yasis. <br>All rights reserved.
-</footer>
+  <div id="scrollIndicator" class="scroll-indicator">
 
-<script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-</script>
+    <div class="scroll-wrapper">
 
-<script>
-  const text = "Wondering who is Manuelson Toyab Yasis? Watch the full video and read the information below to know who is this legend.";
-  let index = 0;
-  const speed = 45;
-  const el = document.getElementById("typingText");
+      <p class="scroll-text">
+        scroll down to explore
+      </p>
 
-  function type() {
-    if (index < text.length) {
-      el.textContent += text.charAt(index);
-      index++;
-      setTimeout(type, speed);
+      <div class="scroll-arrow">
+        <svg class="w-5 h-5 text-white/60" fill="none" stroke="currentColor" stroke-width="2"
+          viewBox="0 0 24 24">
+
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+
+        </svg>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer class="mt-24 py-10 text-center text-gray-500 border-t border-white/10">
+    © <span id="year"></span> Manuelson Yasis. <br />
+    All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+  <script>
+    const text =
+      "Wondering who is Manuelson Toyab Yasis? Watch the full video and read the information below to know who is this legend.";
+
+    let index = 0;
+    const speed = 45;
+
+    const el = document.getElementById("typingText");
+
+    function type() {
+      if (index < text.length) {
+        el.textContent += text.charAt(index);
+        index++;
+        setTimeout(type, speed);
+      }
     }
-  }
 
-  type();
-</script>
+    type();
+  </script>
+
+  <script>
+    let currentSlide = 0;
+
+    const slides = document.querySelectorAll(".video-slide");
+    const videos = document.querySelectorAll("video");
+
+    function showSlide(index) {
+
+      videos.forEach(video => {
+        video.pause();
+        video.currentTime = 0;
+      });
+
+      slides.forEach(slide => {
+        slide.classList.remove("active");
+      });
+
+      slides[index].classList.add("active");
+    }
+
+    function nextSlide() {
+
+      currentSlide++;
+
+      if (currentSlide >= slides.length) {
+        currentSlide = 0;
+      }
+
+      showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+
+      currentSlide--;
+
+      if (currentSlide < 0) {
+        currentSlide = slides.length - 1;
+      }
+
+      showSlide(currentSlide);
+    }
+  </script>
+
+  <script>
+    const scrollIndicator = document.getElementById("scrollIndicator");
+
+    window.addEventListener("scroll", () => {
+
+      if (window.scrollY > 120) {
+        scrollIndicator.classList.add("hide");
+      } else {
+        scrollIndicator.classList.remove("hide");
+      }
+
+    });
+  </script>
 
 </body>
 </html>
